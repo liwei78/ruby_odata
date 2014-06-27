@@ -475,6 +475,8 @@ class Service
       property_name = link.attributes['title'].to_s
       if singular?(property_name)
         inline_entry = link.xpath("./m:inline/atom:entry", @ds_namespaces).first
+        # FIX: 2014-06-27 Rique Li
+        next if inline_entry.nil?
         inline_klass = build_inline_class(klass, inline_entry, property_name)
         klass.send "#{property_name}=", inline_klass
       else
